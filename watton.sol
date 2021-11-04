@@ -204,7 +204,7 @@ contract FreezeToken is BasicToken, Ownable {
     
     event Freezen(address indexed freezer, uint256 amount);
     event UnFreezen(address indexed freezer, uint256 amount);
-    mapping (address => uint256) freezeOf;
+    mapping (address => uint256) public freezeOf;
     
     function freeze(uint256 _value) onlyOwner public {
         balances[msg.sender] = balances[msg.sender].sub(_value);
@@ -230,10 +230,10 @@ contract Wattton is BurnableToken,FreezeToken, DetailedERC20, ERC20Token,Pausabl
     event LockerChanged(address indexed owner, uint256 amount);
     mapping(address => uint) locker;
     
-    string  private _symbol = "WTT";
-    string  private _name = "WATTTON";
-    uint8  private _decimals = 18;
-    uint256 private TOTAL_SUPPLY = 7880000000*(10**uint256(_decimals));
+    string  private constant _symbol = "WTT";
+    string  private constant _name = "WATTTON";
+    uint8  private constant _decimals = 18;
+    uint256 private constant TOTAL_SUPPLY = 7880000000*(10**uint256(_decimals));
     
     constructor() DetailedERC20(_name, _symbol, _decimals) public {
         _totalSupply = TOTAL_SUPPLY;
@@ -271,7 +271,7 @@ contract Wattton is BurnableToken,FreezeToken, DetailedERC20, ERC20Token,Pausabl
         locker[_address] = _value;
         emit LockerChanged(_address, _value);
     }
-    function setLockList(address[] _recipients, uint256[] _balances) public onlyOwnerOrAdmin{
+    function setLockList(address[] _recipients, uint256[] _balances) external onlyOwnerOrAdmin{
         require(_recipients.length == _balances.length,"The number of wallet arrangements and the number of amounts are different.");
         
         for (uint i=0; i < _recipients.length; i++) {
@@ -283,7 +283,7 @@ contract Wattton is BurnableToken,FreezeToken, DetailedERC20, ERC20Token,Pausabl
     }
     
   
-    function transferList(address[] _recipients, uint256[] _balances) public onlyOwnerOrAdmin{
+    function transferList(address[] _recipients, uint256[] _balances) external onlyOwnerOrAdmin{
         require(_recipients.length == _balances.length,"The number of wallet arrangements and the number of amounts are different.");
         
         for (uint i=0; i < _recipients.length; i++) {
