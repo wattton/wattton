@@ -232,7 +232,7 @@ contract Wattton is BurnableToken,FreezeToken, DetailedERC20, ERC20Token,Pausabl
     
     string  private constant _symbol = "WTT";
     string  private constant _name = "WATTTON";
-    uint8  private constant _decimals = 18;
+    uint8  private constant _decimals = 9;
     uint256 private constant TOTAL_SUPPLY = 7880000000*(10**uint256(_decimals));
     
     constructor() DetailedERC20(_name, _symbol, _decimals) public {
