@@ -230,9 +230,9 @@ contract Wattton is BurnableToken,FreezeToken, DetailedERC20, ERC20Token,Pausabl
     event LockerChanged(address indexed owner, uint256 amount);
     mapping(address => uint) locker;
     
-    string  private constant _symbol = "WTT";
+    string  private constant _symbol = "WATT";
     string  private constant _name = "WATTTON";
-    uint8  private constant _decimals = 9;
+    uint8  private constant _decimals = 4;
     uint256 private constant TOTAL_SUPPLY = 7880000000*(10**uint256(_decimals));
     
     constructor() DetailedERC20(_name, _symbol, _decimals) public {
